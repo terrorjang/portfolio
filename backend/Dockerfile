@@ -11,9 +11,6 @@ RUN corepack enable && corepack prepare pnpm@latest --activate
 # Set working directory
 WORKDIR /app
 
-# Just install dependencies since code is mounted from host
-COPY pnpm-lock.yaml package.json ./
-RUN pnpm install
 
 # Expose app port
 EXPOSE 3000

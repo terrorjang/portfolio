@@ -9,4 +9,9 @@ export class AppController {
   async getHello(): Promise<string> {
     return this.appService.getHello();
   }
+
+  @Get('/cache')
+  async getCacheExample(): Promise<string> {
+    return this.appService.cacheExample();
+  }
 }
