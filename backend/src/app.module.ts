@@ -11,6 +11,7 @@ import Keyv from 'keyv';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CONFIG_KEYS } from './config/constants';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -46,6 +47,7 @@ import { CONFIG_KEYS } from './config/constants';
         };
       },
     } as CacheModuleAsyncOptions),
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],
