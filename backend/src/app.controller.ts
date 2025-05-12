@@ -1,5 +1,6 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, UseInterceptors } from '@nestjs/common';
 import { AppService } from './app.service';
+import { CacheInterceptor, CacheKey, CacheTTL } from '@nestjs/cache-manager';
 
 @Controller()
 export class AppController {
@@ -10,8 +11,13 @@ export class AppController {
     return this.appService.getHello();
   }
 
-  @Get('/cache')
-  async getCacheExample(): Promise<string> {
-    return this.appService.cacheExample();
+  @Get('data-interceptor')
+  @UseInterceptors(CacheInterceptor) // Apply the CacheInterceptor
+  @CacheKey('custom_cache_key_for_data') // (Optional) Define a custom cache key
+  @CacheTTL(30 * 1000) // (Optional) Override default TTL to 30 seconds (in milliseconds)
+  async getCachedDataWithInterceptor() {
+    console.log('Executing /data-interceptor endpoint handler...');
+    const data = await this.appService.getCachedDataWithInterceptor();
+    return data;
   }
 }

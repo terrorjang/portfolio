@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Inject } from '@nestjs/common';
-import { Cache } from 'cache-manager';
 import * as bcrypt from 'bcryptjs';
+import { Cache } from '@nestjs/cache-manager';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 
 @Injectable()
@@ -16,20 +16,17 @@ export class AppService {
     return match ? `✅ Password match: ${hashed}` : '❌ Password mismatch';
   }
 
-  async cacheExample(): Promise<string> {
-    const key = 'example-key';
-    const value = 'Hello from Redis!';
-
-    // Check if the value already exists
-    const existing = await this.cacheManager.get<string>(key);
-
-    if (!existing) {
-      // Set the value with 60 seconds TTL only if it does not exist
-      await this.cacheManager.set(key, value, 60000);
-    }
-
-    const cached = await this.cacheManager.get<string>(key);
-
-    return cached ? `🔁 Cached value: ${cached}` : '⚠️ No cached value found';
+  async getCachedDataWithInterceptor(): Promise<{
+    message: string;
+    timestamp: number;
+    source: string;
+  }> {
+    // Simulate a delay for data fetching
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    return {
+      message: 'This data is fetched from the service (not cache).',
+      timestamp: Date.now(),
+      source: 'Service',
+    };
   }
 }

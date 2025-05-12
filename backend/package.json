@@ -28,7 +28,6 @@
     "@nestjs/platform-express": "^11.0.1",
     "@nestjs/typeorm": "^11.0.0",
     "bcryptjs": "^3.0.2",
-    "cache-manager": "^6.4.3",
     "keyv": "^5.3.3",
     "pg": "^8.15.6",
     "reflect-metadata": "^0.2.2",

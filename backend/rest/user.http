@@ -6,3 +6,9 @@ Content-Type: application/json
   "email": "test@example.com",
   "password": "secure123"
 }
+
+###
+GET {{host}}/data-interceptor
+
+###
+GET {{host}}/manual-cache-test
